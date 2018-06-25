@@ -1,3 +1,4 @@
+import aop.American;
 import aop.Chinese;
 import config.SpringConfig;
 import org.junit.Test;
@@ -6,20 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertNotNull;
-
 /**
- * 测试"@ComponentScan"注解是否发挥了作用。
+ * Created by Administrator on 2018/6/25.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfig.class)
-public class ComponentScanTest {
+public class EnableAspectJAutoProxyTest {
 
     @Autowired
-    private Chinese chinese;
+    private Chinese c;
+
+    @Autowired
+    private American a;
 
     @Test
-    public void chineseNotBeNull() {
-        assertNotNull(chinese);
+    public void aopTest() {
+        c.chifan();
+        c.shuijiao();
+        c.goToWork();
+        System.out.println("*********************************");
+        a.chifan();
+        a.shuijiao();
     }
 }

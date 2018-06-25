@@ -6,10 +6,14 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Administrator on 2018\6\22 0022.
+ * 切面类。<p/>
+ *
+ * "@Aspect"表示该类是切面类。<br/>
+ *
+ * "@Component"用来支持Spring自动扫描。
  */
-@Aspect // 表示该类是切面类
-@Component // 用来支持Spring自动扫描
+@Aspect
+@Component
 public class Qiemian {
 
     @Before("execution(* aop.*.chifan())")
