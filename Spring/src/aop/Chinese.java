@@ -1,12 +1,14 @@
 package aop;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Administrator on 2018\6\22 0022.
  */
-@Component() // 用来支持Spring自动扫描
+@Component // 用来支持Spring自动扫描
+@Primary
 public class Chinese implements IHuman {
 
     @Autowired
