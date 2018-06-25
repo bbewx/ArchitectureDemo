@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by Administrator on 2018\6\22 0022.
  */
-@Component // 用来支持Spring自动扫描
+@Component() // 用来支持Spring自动扫描
 public class Chinese implements IHuman {
 
     @Autowired

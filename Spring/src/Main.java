@@ -15,7 +15,7 @@ public class Main {
         Chinese c= (Chinese) context.getBean("chinese");
         c.chifan();
         c.shuijiao();
-        c.goToWork();
+//        c.goToWork();
         System.out.println("*********************************");
         //要用接口接收
         IHuman a= (IHuman) context.getBean("american");
