@@ -1,11 +1,14 @@
-package aop;
+package aop.normal;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Administrator on 2018\6\22 0022.
+ * "@Primary"注解表示装载IHuman对象的bean时，优先装载American对象的bean。参见
+ * {@link EnableAspectJAutoProxyTest}
  */
 @Component // 用来支持Spring自动扫描
+@Primary
 public class American implements IHuman {
     @Override
     public void chifan() {

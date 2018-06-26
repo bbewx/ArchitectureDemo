@@ -13,9 +13,9 @@
 >
     <!-- *********************以下是非注解形式的设置************************** -->
     <!--&lt;!&ndash; 首相要实例化目标对象类和切面类 &ndash;&gt;-->
-    <!--<bean id="chinese" class="aop.Chinese"></bean>-->
-    <!--<bean id="american" class="aop.American"></bean>-->
-    <!--<bean id="qiemian" class="aop.Qiemian"></bean>-->
+    <!--<bean id="chinese" class="aop.normal.Chinese"></bean>-->
+    <!--<bean id="american" class="aop.normal.American"></bean>-->
+    <!--<bean id="qiemian" class="aop.normal.Qiemian"></bean>-->
 
     <!--<aop:config>-->
         <!--&lt;!&ndash; 要切入的对象 &ndash;&gt;-->
@@ -40,7 +40,7 @@
 
     <!-- 该 BeanPostProcessor 将自动起作用，对标注 @Autowired 的 Bean 进行自动注入 -->
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
-    <bean id="bicycle" class="aop.Bicycle">
+    <bean id="bicycle" class="aop.normal.Bicycle">
         <property name="name" value="美利达"/>
     </bean>
 

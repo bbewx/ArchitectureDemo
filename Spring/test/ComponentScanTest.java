@@ -1,4 +1,4 @@
-import aop.Chinese;
+import aop.normal.Chinese;
 import config.SpringConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;

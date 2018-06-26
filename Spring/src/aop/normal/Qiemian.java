@@ -1,8 +1,9 @@
-package aop;
+package aop.normal;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,17 +17,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class Qiemian {
 
-    @Before("execution(* aop.*.chifan())")
+    /**
+     * 定义切点
+     */
+    @Pointcut("execution(* aop.normal.*.chifan(..))")
+    public void chifan() {}
+
+    /**
+     * 前置通知
+     */
+    @Before("chifan()")
     public void chifanqian(){
         System.out.println("饭前洗手");
     }
 
-    @After("execution(* aop.*.chifan())")
+    /**
+     * 后置通知
+     */
+    @After("chifan()")
     public void chifanhou(){
         System.out.println("饭后漱口");
     }
 
-    @Before("execution(* aop.*.shuijiao())")
+    @Before("execution(* aop.normal.*.shuijiao(..))")
     public void shuijiaoqian(){
         System.out.println("睡前洗澡");
     }

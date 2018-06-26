@@ -1,5 +1,5 @@
-import aop.Chinese;
-import aop.IHuman;
+import aop.normal.Chinese;
+import aop.normal.IHuman;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

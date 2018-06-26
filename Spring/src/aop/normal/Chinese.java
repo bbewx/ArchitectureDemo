@@ -1,14 +1,12 @@
-package aop;
+package aop.normal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Administrator on 2018\6\22 0022.
  */
 @Component // 用来支持Spring自动扫描
-@Primary
 public class Chinese implements IHuman {
 
     @Autowired
@@ -25,6 +23,7 @@ public class Chinese implements IHuman {
     }
 
     public void goToWork() {
-        System.out.println("我骑车" + bicycle.getName() + "去上班");
+        assert(null != bicycle);
+        System.out.println("我骑" + bicycle.getName() + "去上班");
     }
 }
