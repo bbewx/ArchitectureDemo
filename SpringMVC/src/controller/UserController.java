@@ -34,8 +34,10 @@ public class UserController {
         users.put("lyl", new User("lyl", "321"));
     }
 
-    /*
-    实现“查”
+    /**
+     * 实现“查”
+     * @param model
+     * @return
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String list(Model model) {
@@ -44,8 +46,14 @@ public class UserController {
     }
 
     /*
-     引入method方法，用来区分不同请求方式下的同名方法。例如：
-     当前台异GET方式访问时，执行本方法；以POST方式访问时，执行下一个方法。
+
+     */
+
+    /**
+     * 引入method方法，用来区分不同请求方式下的同名方法。例如：
+     * 当前台以GET方式访问时，执行本方法；以POST方式访问时，执行下一个方法。
+     * @param model
+     * @return
      */
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(Model model) {
@@ -54,8 +62,8 @@ public class UserController {
         return "user/add";
     }
 
-    /*
-     实现“增”
+    /**
+     * 实现“增”
 
      1.返回值中包含redirect字段，表示需要重定向（即跳转）。
      参考{@link org.springframework.web.servlet.view.UrlBasedViewResolver}
@@ -64,6 +72,12 @@ public class UserController {
      {@link org.springframework.validation.BindingResult}返回验证结果。
      3.关于上传文件，首先载入commons-fileupload-1.2.2和commons-io-2.0.1两个jar包，在
      形参中传入MultipartFile对象。
+     * @param user
+     * @param br
+     * @param files
+     * @param req
+     * @return
+     * @throws IOException
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@Validated User user, BindingResult br,
@@ -85,8 +99,11 @@ public class UserController {
         return "redirect:/user/users";
     }
 
-    /*
-    通过传参实现详细信息查询。
+    /**
+     * 通过传参实现详细信息查询。
+     * @param name
+     * @param model
+     * @return
      */
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String show(@PathVariable String name, Model model) {

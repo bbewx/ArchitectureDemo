@@ -7,8 +7,15 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!-- 使用注解的方式 -->
+    <!-- 启用spring mvc 注解 -->
+    <!-- 如果设置了component-scan，则该设置可以忽略 -->
+    <!--<context:annotation-config />-->
+
+    <!-- 设置使用注解的类所在的包 -->
     <context:component-scan base-package="controller"/>
+
+    <!-- 自动注册RequestMappingHandlerMapping与RequestMappingHandlerAdapter两个Bean,
+    这是Spring MVC为@Controller分发请求所必需的 -->
     <mvc:annotation-driven/>
 
     <!-- 使用访问bean的方式 -->
