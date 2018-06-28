@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Created by Administrator on 2018\6\26 0026.
+ * 创建用户控制器。
+ * "@RestController"
  */
 @RestController
 @EnableAutoConfiguration
