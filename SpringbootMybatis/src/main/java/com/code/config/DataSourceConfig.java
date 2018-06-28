@@ -16,7 +16,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 /**
- * 2018/4/19 18:46
+ * 数据源配置类。<p/>
+ * "@Configuration"可理解为用spring的时候xml里面的<beans>标签。
  */
 @Configuration
 @MapperScan("com.code.dao")
@@ -38,7 +39,9 @@ public class DataSourceConfig {
         //该配置非常的重要，如果不将PageInterceptor设置到SqlSessionFactoryBean中，导致分页失效
         fb.setPlugins(new Interceptor[]{pageInterceptor});
         fb.setTypeAliasesPackage(env.getProperty("mybatis.type-aliases-package"));
-        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
+        fb.setMapperLocations(
+                new PathMatchingResourcePatternResolver()
+                        .getResources(env.getProperty("mybatis.mapper-locations")));
         return fb.getObject();
     }
 }

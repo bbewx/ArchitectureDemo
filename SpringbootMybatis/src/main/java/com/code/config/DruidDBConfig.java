@@ -12,7 +12,8 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * Created by Donghua.Chen on 2018/4/19.
+ * Druid数据库配置类。<p/>
+ *
  */
 @Configuration
 public class DruidDBConfig {
