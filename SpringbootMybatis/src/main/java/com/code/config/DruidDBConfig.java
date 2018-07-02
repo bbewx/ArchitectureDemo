@@ -13,9 +13,11 @@ import java.sql.SQLException;
 
 /**
  * Druid数据库配置类。<p/>
+ * 提供了采用xml配置数据源的可行性，即采用"@ImportResource"注解，将配置的数据源xml导入进来。
  *
  */
 @Configuration
+// @ImportResource("classpath:configuration/DruidDBConfig.xml")
 public class DruidDBConfig {
 
     private Logger logger = LoggerFactory.getLogger(DruidDBConfig.class);
