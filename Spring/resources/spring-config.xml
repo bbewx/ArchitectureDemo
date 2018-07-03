@@ -9,8 +9,10 @@
         http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"
-       default-autowire="byName"
+
 >
+    <!--default-autowire="byName"-->
+
     <!-- *********************以下是非注解形式的设置************************** -->
     <!--&lt;!&ndash; 首相要实例化目标对象类和切面类 &ndash;&gt;-->
     <!--<bean id="chinese" class="aop.normal.Chinese"></bean>-->
