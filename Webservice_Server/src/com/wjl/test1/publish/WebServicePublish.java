@@ -1,9 +1,9 @@
 /*
  * 创建 Administrator 2017-05-23 17:24
  */
-package publish;
+package com.wjl.test1.publish;
 
-import service.WebServiceImpl;
+import com.wjl.test1.service.WebServiceImpl;
 
 import javax.xml.ws.Endpoint;
 

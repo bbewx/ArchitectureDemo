@@ -1,9 +1,9 @@
 /*
  * 创建 Administrator 2017-05-23 17:38
  */
-package publish;
+package com.wjl.test1.publish;
 
-import service.WebServiceImpl;
+import com.wjl.test1.service.WebServiceImpl;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

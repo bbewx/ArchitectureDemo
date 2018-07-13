@@ -1,7 +1,7 @@
 /*
  * 创建 Administrator 2017-05-23 17:23
  */
-package service;
+package com.wjl.test1.service;
 
 import javax.jws.WebService;
 
