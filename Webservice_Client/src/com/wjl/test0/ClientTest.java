@@ -1,5 +1,8 @@
 package com.wjl.test0;
 
+import com.wjl.test0.service.ServiceTest;
+import com.wjl.test0.service.ServiceTestService;
+
 /**
  * 在运行客户端测试前，需要采用命令生成相关的接口类。<p/>
  * 格式：
