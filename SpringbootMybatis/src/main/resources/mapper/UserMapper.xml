@@ -9,7 +9,7 @@
         userId,userName,password,phone
     </sql>
 
-    <insert id="insert" parameterType="com.code.model.UserDomain">
+    <insert id="insert" parameterType="user">
         INSERT INTO
         <include refid="BASE_TABLE"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -26,7 +26,7 @@
         </trim>
     </insert>
 
-    <select id="selectUsers" resultType="com.code.model.UserDomain">
+    <select id="selectUsers" resultType="user">
         SELECT
         <include refid="BASE_COLUMN"/>
         FROM

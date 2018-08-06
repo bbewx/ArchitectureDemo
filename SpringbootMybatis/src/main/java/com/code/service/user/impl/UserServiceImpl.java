@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import java.util.Map;
  * Created by Administrator on 2018\5\1 0001.
  */
 @Service(value = "userService")
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired

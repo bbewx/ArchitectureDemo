@@ -1,0 +1,28 @@
+#oracle下的sql语句
+
+#创建表
+CREATE TABLE t_user(
+  userId INT NOT NULL PRIMARY KEY,
+  userName VARCHAR(255) NOT NULL ,
+  password VARCHAR(255) NOT NULL ,
+  phone VARCHAR(255) NOT NULL
+);
+
+#创建自增长序列，以便插入数据时id能够自动增长，步长为1
+ Create Sequence addAuto_Sequence 
+ Increment by 1     -- 每次加几个 
+ start with 1       -- 从1开始计数     
+ nomaxvalue         -- 不设置最大值,设置最大值：maxvalue 9999  
+ nocycle            -- 一直累加，不循环    
+ cache 10;
+
+#创建触发器，新增一行时触发
+Create trigger addAuto before 
+ insert on t_user for each row /*对每一行都检测是否触发*/
+ begin
+ select addAuto_Sequence.nextval into:New.userId from dual;
+ end;      
+ 
+#检验
+INSERT INTO T_USER (USERNAME,PASSWORD,PHONE) VALUES ('WJL','WJL','1111111');
+SELECT * FROM T_USER;

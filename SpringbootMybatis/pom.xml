@@ -33,11 +33,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>1.3.2</version>
-		</dependency>
 
 		<!-- 分页插件 -->
 		<dependency>
@@ -53,6 +48,35 @@
 			<version>1.1.0</version>
 		</dependency>
 
+		<!-- mybatisplus依赖 -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatisplus-spring-boot-starter</artifactId>
+			<version>1.0.5</version>
+		</dependency>
+		<!-- mybatisplus核心库 -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>2.1.8</version>
+		</dependency>
+		<!-- 模板引擎，用来配合代码生成器 -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-engine-core</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<!-- mybatis依赖 -->
+		<!-- 当整合mybatis-plus时，这个依赖需放在mybatis-plus依赖下方 -->
+		<!-- 也有说法是mybatis-plus会自动维护mybatis依赖，此处不要配置，否则会版本冲突 -->
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<!-- oracle依赖 -->
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>

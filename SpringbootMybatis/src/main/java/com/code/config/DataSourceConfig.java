@@ -35,13 +35,22 @@ public class DataSourceConfig {
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
+
+        // 数据源配置
         fb.setDataSource(dataSource);
-        //该配置非常的重要，如果不将PageInterceptor设置到SqlSessionFactoryBean中，导致分页失效
+
+        // 插件配置
+        // 该配置非常的重要，如果不将PageInterceptor设置到SqlSessionFactoryBean中，导致分页失效
         fb.setPlugins(new Interceptor[]{pageInterceptor});
+
+        // 设置类型别名
+        // 之所以这样配置，是避免在mapper.xml文件中配置的繁琐
         fb.setTypeAliasesPackage(env.getProperty("mybatis.type-aliases-package"));
+
         fb.setMapperLocations(
                 new PathMatchingResourcePatternResolver()
                         .getResources(env.getProperty("mybatis.mapper-locations")));
+
         return fb.getObject();
     }
 }

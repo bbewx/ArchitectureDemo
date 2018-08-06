@@ -1,10 +1,22 @@
 package com.code.model;
 
+import org.apache.ibatis.type.Alias;
+
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2018\5\1 0001.
+ * "@Alias"注解为该对象设置了一个别名，在mybatis的.xml配置文件中使用该对象时，可直接用别名，降低
+ * 配置复杂度。例如：
+ * <select id="selectUsers" resultType="user">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+   </select>
+ *
+ *
  */
+@Alias("user")
 public class UserDomain implements Serializable {
 
     private Integer userId;
