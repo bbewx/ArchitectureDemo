@@ -26,7 +26,7 @@ import java.lang.reflect.Method;
 import java.time.Duration;
 
 /**
- * Created by Administrator on 2018\5\5 0005.
+ * Redis配置类。
  */
 @Configuration
 @EnableCaching
@@ -40,11 +40,11 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Value("${spring.redis.port}")
     private int port;
 
-    @Value("${spring.redis.timeout}")
-    private int timeout;
-
     @Value("${spring.redis.password}")
     private String password;
+
+    @Value("${spring.redis.timeout}")
+    private int timeout;
 
     @Value("${spring.redis.database}")
     private int database;

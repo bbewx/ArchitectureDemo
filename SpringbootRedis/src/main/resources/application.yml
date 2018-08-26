@@ -1,0 +1,29 @@
+spring:
+  cache:
+    type: redis
+  #redis配置
+  #需要注意的是，Springboot 1.5.x版本使用的redis客户端为jedis，而Springboot 2.x版本使用的
+  #redis客户端为lettuce，因此配置上有不少差异
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 5000
+    database: 0
+    #lettuce客户端配置
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+    #jedis客户端配置
+#    jedis:
+#      pool:
+#        max-active: 8
+#        max-idle: 8
+#        max-wait: -1ms
+#        min-idle: 0
+
+server:
+  port: 8081
