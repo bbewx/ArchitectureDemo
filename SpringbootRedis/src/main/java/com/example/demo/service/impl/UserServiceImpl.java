@@ -61,11 +61,16 @@ public class UserServiceImpl implements UserService {
         return userMap.get(id);
     }
 
+    /**
+     * "@CachePut"注解要求调用方法时每次都执行方法体内部逻辑。
+     * 注意：必须有返回值，否则不会保存至Redis缓存。
+     */
     @Override
-    @CachePut(value = "user", key = "'user'.concat(#user.userId.toString())")
-    public void update(User user) {
-        System.out.println("findUserById query from db, id: {}======" + user.getUserId());
+    @CachePut(value = "user", key = "'user'.concat(#user.getUserId().toString())")
+    public User update(User user) {
+        System.out.println("update query from db, id: {}======" + user.getUserId());
         userMap.put(user.getUserId(), user);
+        return user;
     }
 
     @Override

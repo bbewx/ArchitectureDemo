@@ -13,7 +13,7 @@ public interface UserService {
 
     User findUserById(Integer id);
 
-    void update(User user);
+    User update(User user);
 
     User remove(Integer id);
 

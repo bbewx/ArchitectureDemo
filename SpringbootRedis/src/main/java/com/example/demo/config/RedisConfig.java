@@ -27,6 +27,8 @@ import java.time.Duration;
 
 /**
  * Redis配置类。
+ *
+ * "@EnableCaching"
  */
 @Configuration
 @EnableCaching
