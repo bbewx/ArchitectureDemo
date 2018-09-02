@@ -18,6 +18,7 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -58,38 +59,51 @@ public class RedisConfig extends CachingConfigurerSupport {
     private int minIdle;
 
     /**
-     *  注解@Cache的管理器，设置过期时间的单位是秒
-     * @Description:
-     * @return
+     *  配置缓存管理器。
      */
     @Bean
     CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-//        //user信息缓存配置
+
+        // 初始化RedisCacheWriter
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
+
+        // 初始化RedisCacheConfiguration
+        // 设置CacheManager的值序列化方式为JdkSerializationRedisSerializer,
+        // 但其实RedisCacheConfiguration默认就是使用StringRedisSerializer序列化key，
+        // JdkSerializationRedisSerializer序列化value,所以以下注释代码为默认实现
+        // RedisCacheConfiguration.defaultCacheConfig()的方法体为：
+        // return new RedisCacheConfiguration(Duration.ZERO, true, true, CacheKeyPrefix.simple(),
+        // SerializationPair.fromSerializer(new StringRedisSerializer()),
+        // SerializationPair.fromSerializer(new JdkSerializationRedisSerializer()), conversionService);
+//        ClassLoader loader = this.getClass().getClassLoader();
+//        JdkSerializationRedisSerializer jdkSerializer
+//                = new JdkSerializationRedisSerializer(loader);
+//        RedisSerializationContext.SerializationPair<Object> pair
+//                = RedisSerializationContext.SerializationPair.fromSerializer(jdkSerializer);
+//        RedisCacheConfiguration defaultCacheConfig
+//                = RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
+        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig();
+        // 设置默认超过期时间是30秒
+        defaultCacheConfig.entryTtl(Duration.ofSeconds(30));
+
+        // 初始化redisCacheConfigurationMap
+        // user信息缓存配置
 //        RedisCacheConfiguration userCacheConfiguration
 //                = RedisCacheConfiguration.defaultCacheConfig().entryTtl(
-//                        Duration.ofMinutes(30)).disableCachingNullValues().prefixKeysWith("user");
-//        //product信息缓存配置
+//                Duration.ofMinutes(30)).disableCachingNullValues().prefixKeysWith("user");
+        // product信息缓存配置
 //        RedisCacheConfiguration productCacheConfiguration
 //                = RedisCacheConfiguration.defaultCacheConfig().entryTtl(
-//                        Duration.ofMinutes(10)).disableCachingNullValues().prefixKeysWith("product");
+//                Duration.ofMinutes(10)).disableCachingNullValues().prefixKeysWith("product");
 //        Map<String, RedisCacheConfiguration> redisCacheConfigurationMap = new HashMap<>();
 //        redisCacheConfigurationMap.put("user", userCacheConfiguration);
 //        redisCacheConfigurationMap.put("product", productCacheConfiguration);
-        //初始化一个RedisCacheWriter
-        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory);
 
-
-        //设置CacheManager的值序列化方式为JdkSerializationRedisSerializer,但其实RedisCacheConfiguration默认就是使用StringRedisSerializer序列化key，JdkSerializationRedisSerializer序列化value,所以以下注释代码为默认实现
-        //ClassLoader loader = this.getClass().getClassLoader();
-        //JdkSerializationRedisSerializer jdkSerializer = new JdkSerializationRedisSerializer(loader);
-        //RedisSerializationContext.SerializationPair<Object> pair = RedisSerializationContext.SerializationPair.fromSerializer(jdkSerializer);
-        //RedisCacheConfiguration defaultCacheConfig=RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
-
-
-        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig();
-        //设置默认超过期时间是30秒
-        defaultCacheConfig.entryTtl(Duration.ofSeconds(30));
-        //初始化RedisCacheManager
+        // 初始化RedisCacheManager
+        // 需要3个参数：
+        // 1.redisCacheWriter
+        // 2.defaultCacheConfig
+        // 3.redisCacheConfigurationMap，
 //        RedisCacheManager cacheManager = new RedisCacheManager(
 //                redisCacheWriter, defaultCacheConfig, redisCacheConfigurationMap);
         RedisCacheManager cacheManager = new RedisCacheManager(
@@ -109,6 +123,21 @@ public class RedisConfig extends CachingConfigurerSupport {
         template.setValueSerializer(jackson2JsonRedisSerializer);
         template.afterPropertiesSet();
         return template;
+    }
+
+    /**
+     * 因为Springboot的版本号是2.x，因此配置LettuceConnectionFactory；
+     * 如果Springboot的版本号是1.x，则配置JedisConnectionFactory。
+     */
+    @Bean
+    LettuceConnectionFactory redisConnectionFactory() {
+        LettuceConnectionFactory f = new LettuceConnectionFactory();
+        f.setHostName(host);
+        f.setPort(port);
+        f.setPassword(password);
+        f.setTimeout(timeout);
+        f.setDatabase(database);
+        return f;
     }
 
     /**
@@ -135,7 +164,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 //    }
 
     /**
-     *  注解@Cache key生成规则
+     *  配置key的生成规则。
+     *  TODO:这个方法还需要研究，不知道在哪个环节有用
      */
     @Bean
     public KeyGenerator keyGenerator() {
@@ -154,15 +184,15 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
     /**
-     * redis数据操作异常处理
-     * 这里的处理：在日志中打印出错误信息，但是放行
+     * redis数据操作异常处理。
+     * 这里的处理：在日志中打印出错误信息，但是放行，
      * 保证redis服务器出现连接等问题的时候不影响程序的正常运行，使得能够出问题时不用缓存
-     * @return
+     * @return 返回缓存异常处理
      */
     @Bean
     @Override
     public CacheErrorHandler errorHandler() {
-        CacheErrorHandler cacheErrorHandler = new CacheErrorHandler() {
+        return new CacheErrorHandler() {
             @Override
             public void handleCacheGetError(RuntimeException e, Cache cache, Object key) {
                 logger.error("redis异常：key=[{}]",key,e);
@@ -183,6 +213,5 @@ public class RedisConfig extends CachingConfigurerSupport {
                 logger.error("redis异常：",e);
             }
         };
-        return cacheErrorHandler;
     }
 }
