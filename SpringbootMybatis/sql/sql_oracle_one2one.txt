@@ -1,0 +1,56 @@
+#oracle下的sql语句
+
+#创建学生表
+-- Create table
+create table T_STUDENT
+(
+  ID      VARCHAR2(100) not null,
+  STUNAME VARCHAR2(100),
+  CARDID  VARCHAR2(100)
+)
+tablespace TS_LEARN
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table T_STUDENT
+  add primary key (ID)
+  using index 
+  tablespace TS_LEARN
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+
+#创建学生卡表
+-- Create table
+create table T_STUDENTCARD
+(
+  ID      VARCHAR2(100) not null,
+  CARDNUM VARCHAR2(100)
+)
+tablespace TS_LEARN
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table T_STUDENTCARD
+  add primary key (ID)
+  using index 
+  tablespace TS_LEARN
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

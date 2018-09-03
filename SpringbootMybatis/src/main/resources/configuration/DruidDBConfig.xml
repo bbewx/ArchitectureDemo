@@ -26,7 +26,7 @@
 
     <!-- 引入项目配置文件，配置文件中包含数据库连接信息 -->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
+        <property stuName="locations">
             <list>
                 <value>classpath:properties/config.properties</value>
                 <value>classpath:application.properties</value>
@@ -34,29 +34,29 @@
         </property>
     </bean>
 
-    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+    <bean stuName="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
-        <property name="url" value="${jdbc_url}"/>
-        <property name="username" value="${jdbc_username}"/>
-        <property name="password" value="${jdbc_password}"/>
-        <property name="driverClassName" value="${driverClassName}"/>
-        <property name="filters" value="${filters}"/>
-        <property name="initialSize" value="${initialSize}"/>
-        <property name="maxActive" value="${maxActive}"/>
-        <property name="minIdle" value="${minIdle}"/>
-        <property name="maxWait" value="${maxWait}"/>
-        <property name="timeBetweenEvictionRunsMillis" 
+        <property stuName="url" value="${jdbc_url}"/>
+        <property stuName="username" value="${jdbc_username}"/>
+        <property stuName="password" value="${jdbc_password}"/>
+        <property stuName="driverClassName" value="${driverClassName}"/>
+        <property stuName="filters" value="${filters}"/>
+        <property stuName="initialSize" value="${initialSize}"/>
+        <property stuName="maxActive" value="${maxActive}"/>
+        <property stuName="minIdle" value="${minIdle}"/>
+        <property stuName="maxWait" value="${maxWait}"/>
+        <property stuName="timeBetweenEvictionRunsMillis"
                   value="${timeBetweenEvictionRunsMillis}"/>
-        <property name="minEvictableIdleTimeMillis"
+        <property stuName="minEvictableIdleTimeMillis"
                   value="${minEvictableIdleTimeMillis}"/>
-        <property name="validationQuery" value="${validationQuery}"/>
-        <property name="testWhileIdle" value="${testWhileIdle}"/>
-        <property name="testOnReturn" value="${testOnReturn}"/>
-        <property name="testOnBorrow" value="${testOnBorrow}"/>
-        <property name="poolPreparedStatements" value="${poolPreparedStatements}"/>
-        <property name="maxPoolPreparedStatementPerConnectionSize"
+        <property stuName="validationQuery" value="${validationQuery}"/>
+        <property stuName="testWhileIdle" value="${testWhileIdle}"/>
+        <property stuName="testOnReturn" value="${testOnReturn}"/>
+        <property stuName="testOnBorrow" value="${testOnBorrow}"/>
+        <property stuName="poolPreparedStatements" value="${poolPreparedStatements}"/>
+        <property stuName="maxPoolPreparedStatementPerConnectionSize"
                   value="${maxPoolPreparedStatementPerConnectionSize}"/>
-        <property name="maxOpenPreparedStatements"
+        <property stuName="maxOpenPreparedStatements"
                   value="${maxOpenPreparedStatements}"/>
     </bean>
 </beans>

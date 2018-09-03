@@ -1,6 +1,6 @@
 #oracle下的sql语句
 
-#创建表
+#创建用户表
 CREATE TABLE t_user(
   userId INT NOT NULL PRIMARY KEY,
   userName VARCHAR(255) NOT NULL ,

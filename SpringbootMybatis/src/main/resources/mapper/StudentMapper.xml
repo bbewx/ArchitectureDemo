@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.code.dao.oneToOne.StudentDao" >
+
+    <insert id="insert" parameterType="student">
+        <!-- 设置主键生成策略为UUID -->
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select sys_guid() from dual
+        </selectKey>
+        insert into t_student (id, stuName, cardId) values (#{id}, #{stuName}, #{studentCard.id})
+    </insert>
+
+    <!-- 采用关联嵌套查询模式查询数据******************************************** -->
+    <!--<resultMap id="studentMap" type="student">-->
+        <!--<result property="id" column="id"/>-->
+        <!--<result property="stuName" column="stuname"/>-->
+        <!--<association property="studentCard" column="cardId"-->
+                     <!--select="com.code.dao.oneToOne.StudentCardDao.getStudentCardById"/>-->
+    <!--</resultMap>-->
+
+    <!--<select id="selectStudents" resultMap="studentMap">-->
+        <!--select * from t_student-->
+    <!--</select>-->
+
+    <!--<select id="selectStudentByName" parameterType="string" resultMap="studentMap">-->
+        <!--select * from t_student where stuname = #{name}-->
+    <!--</select>-->
+
+    <!-- 采用关联嵌套结果模式查询数据******************************************** -->
+    <resultMap id="studentMap" type="student">
+        <result property="id" column="id"/>
+        <result property="stuName" column="stuname"/>
+        <association property="studentCard" column="cardId"
+                     javaType="studentCard" resultMap="studentCardMap"/>
+    </resultMap>
+    <resultMap id="studentCardMap" type="studentCard">
+        <result property="id" column="id"/>
+        <result property="cardNum" column="cardNum"/>
+    </resultMap>
+
+    <select id="selectStudents" resultMap="studentMap">
+        select * from t_student where
+    </select>
+
+</mapper>

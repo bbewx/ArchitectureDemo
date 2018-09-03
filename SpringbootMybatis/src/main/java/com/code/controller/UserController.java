@@ -1,7 +1,7 @@
 package com.code.controller;
 
 import com.code.model.UserDomain;
-import com.code.service.user.UserService;
+import com.code.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;

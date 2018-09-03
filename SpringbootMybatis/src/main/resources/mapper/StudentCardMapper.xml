@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.code.dao.oneToOne.StudentCardDao" >
+
+    <insert id="insert" parameterType="studentCard">
+        <!-- 设置主键生成策略为UUID -->
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select sys_guid() from dual
+        </selectKey>
+        insert into t_studentcard (id, cardNum) values (#{id}, #{cardNum})
+    </insert>
+
+    <select id="getStudentCardById" parameterType="string" resultType="studentCard">
+        select * from t_studentcard where id = #{id}
+    </select>
+</mapper>
